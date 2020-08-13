@@ -6,11 +6,11 @@ import States from "./components/States/States";
 
 function App() {
   return (
-    <>
+    <div>
       <CssBaseline />
       <Toolbar />
       <States />
-    </>
+    </div>
   );
 }
 
