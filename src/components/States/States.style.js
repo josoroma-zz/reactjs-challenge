@@ -4,7 +4,7 @@ const Style = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(6),
     paddingTop: theme.spacing(14),
-    paddingBottom: theme.spacing(2),
+    paddingBottom: 0,
   },
   title: {
     fontSize: 36,

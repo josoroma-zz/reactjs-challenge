@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -6,24 +7,27 @@ import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./StateCard.style";
 
-function StateCard() {
+function StateCard({ title, population, density }) {
   const classes = useStyles();
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <CardHeader
-        title="Shrimp and Chorizo Paella"
+        title={title}
         classes={{ root: classes.header, title: classes.title }}
       />
       <CardContent>
-        <Typography variant="body2">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you likes.
-        </Typography>
+        <Typography variant="body2">Population: {population}</Typography>
+        <Typography variant="body2">Population Density: {density}</Typography>
       </CardContent>
     </Card>
   );
 }
+
+StateCard.propTypes = {
+  density: PropTypes.string,
+  population: PropTypes.string,
+  title: PropTypes.string,
+};
 
 export default StateCard;
