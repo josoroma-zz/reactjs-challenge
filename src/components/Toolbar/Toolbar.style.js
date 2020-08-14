@@ -10,6 +10,10 @@ const Style = makeStyles((theme) => ({
   },
   title: {
     marginTop: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(1) + theme.spacing(1) / 2,
+      fontSize: 14,
+    },
   },
 }));
 

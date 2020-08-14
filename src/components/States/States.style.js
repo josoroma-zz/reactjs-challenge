@@ -5,6 +5,10 @@ const Style = makeStyles((theme) => ({
     padding: theme.spacing(6),
     paddingTop: theme.spacing(20),
     paddingBottom: 0,
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(3),
+      paddingTop: theme.spacing(16),
+    },
   },
   link: {
     textDecoration: "none",
@@ -13,6 +17,9 @@ const Style = makeStyles((theme) => ({
     fontSize: 36,
     fontWeight: 500,
     lineHeight: 1.1,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 14,
+    },
   },
   smallTitle: {
     fontSize: "65%",
