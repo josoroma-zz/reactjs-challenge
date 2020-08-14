@@ -1,4 +1,4 @@
-async function csv2objConverterService(csv) {
+async function csv2objConverterUtil(csv) {
   let lines = "";
   for (let i = 0; i < csv.length; i++) {
     lines += `${csv[i].toString()}\n`;
@@ -24,4 +24,4 @@ async function csv2objConverterService(csv) {
   return result;
 }
 
-export default csv2objConverterService;
+export default csv2objConverterUtil;

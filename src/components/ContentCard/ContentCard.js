@@ -5,9 +5,9 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-import useStyles from "./StateCard.style";
+import useStyles from "./ContentCard.style";
 
-function StateCard({ title, population, density }) {
+function ContentCard({ title, population, density }) {
   const classes = useStyles();
 
   return (
@@ -24,10 +24,10 @@ function StateCard({ title, population, density }) {
   );
 }
 
-StateCard.propTypes = {
+ContentCard.propTypes = {
   density: PropTypes.string,
   population: PropTypes.string,
   title: PropTypes.string,
 };
 
-export default StateCard;
+export default ContentCard;

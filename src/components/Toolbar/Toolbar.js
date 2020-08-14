@@ -12,7 +12,7 @@ function Toolbar() {
     <header>
       <AppBar>
         <AppToolbar className={classes.toolbar}>
-          <Typography variant="h6">Josoroma ReactJS Challenge</Typography>
+          <Typography variant="h6">Population Estimates Program</Typography>
         </AppToolbar>
       </AppBar>
     </header>
