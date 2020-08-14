@@ -7,7 +7,7 @@
 import _orderBy from "lodash.orderby";
 import _zipObject from "lodash.zipobject";
 
-const csv2objConverterService = (url) =>
+const csv2objConverterService = (url: "") =>
   fetch(url).then(async (res) => {
     const result = await res.json();
 

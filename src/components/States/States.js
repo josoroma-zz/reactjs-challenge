@@ -5,7 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
 
+import { useSearchValueState } from "../../context/SearchValueContext";
+
 import { endpoints } from "../../config/constants";
+import searchUtil from "../../utils/searchUtil";
 import csv2objFetcherService from "../../services/csv2objFetcherService";
 import ContentCard from "../ContentCard/ContentCard";
 import ContentMessage from "../ContentMessage/ContentMessage";
@@ -14,6 +17,7 @@ import useStyles from "./States.style";
 
 function State() {
   const classes = useStyles();
+  const { searchValue } = useSearchValueState();
 
   const requestURLConst = "for=state:*&DATE_CODE=1";
 
@@ -27,7 +31,7 @@ function State() {
       <ContentMessage
         type="message"
         title="Good Catch!"
-        description="Let's try gain."
+        description="Let's try again."
       />
     );
   }
@@ -36,7 +40,19 @@ function State() {
     return <ContentMessage type="progress" />;
   }
 
-  const { data: response } = data;
+  const searchResults = searchUtil(data.data, searchValue);
+
+  if (searchResults.length === 0) {
+    return (
+      <ContentMessage
+        type="message"
+        title="No Search Results Found!"
+        description="Let's ask again."
+      />
+    );
+  }
+
+  console.log("searchResults", searchResults);
 
   return (
     <Container className={classes.root} maxWidth="md">
@@ -45,7 +61,7 @@ function State() {
         <small className={classes.smallTitle}>as per the 2010 US Census</small>
       </Typography>
       <Divider className={classes.divider} />
-      {response.map(
+      {searchResults.map(
         (state) =>
           state.NAME &&
           state.state && (

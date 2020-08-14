@@ -1,4 +1,4 @@
-async function csv2objConverterUtil(csv) {
+function csv2objConverterUtil(csv) {
   let lines = "";
   for (let i = 0; i < csv.length; i++) {
     lines += `${csv[i].toString()}\n`;

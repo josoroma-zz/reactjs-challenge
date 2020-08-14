@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./ContentCard.style";
 
-function ContentCard({ title, population, density }) {
+function ContentCard({ title = "", population = "", density = "" }) {
   const classes = useStyles();
 
   return (
@@ -24,10 +24,16 @@ function ContentCard({ title, population, density }) {
   );
 }
 
+ContentCard.defaultProps = {
+  density: "",
+  population: "",
+  title: "",
+};
+
 ContentCard.propTypes = {
-  density: PropTypes.string,
-  population: PropTypes.string,
-  title: PropTypes.string,
+  density: PropTypes.string.isRequired,
+  population: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default ContentCard;

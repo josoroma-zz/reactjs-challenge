@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const Style = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(6),
-    paddingTop: theme.spacing(14),
+    paddingTop: theme.spacing(20),
     paddingBottom: 0,
   },
   link: {

@@ -33,10 +33,14 @@ function ContentMessage({ title, description, type }) {
   );
 }
 
+ContentMessage.defaultProps = {
+  type: "message",
+};
+
 ContentMessage.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
 };
 
 export default ContentMessage;

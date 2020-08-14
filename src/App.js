@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+// Context - Providers
+import { SearchValueProvider } from "./context/SearchValueContext";
 // Top Header
 import Toolbar from "./components/Toolbar/Toolbar";
 // Content - Pages
@@ -12,19 +14,21 @@ function App() {
   return (
     <div>
       <CssBaseline />
-      <Router>
-        <div>
-          <Toolbar />
-          <Switch>
-            <Route path="/:stateId/counties">
-              <Counties />
-            </Route>
-            <Route path="/">
-              <States />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <SearchValueProvider>
+        <Router>
+          <div>
+            <Toolbar />
+            <Switch>
+              <Route path="/:stateId/counties">
+                <Counties />
+              </Route>
+              <Route path="/">
+                <States />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </SearchValueProvider>
     </div>
   );
 }
