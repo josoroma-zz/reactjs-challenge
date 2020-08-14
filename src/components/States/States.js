@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
 
-import { useSearchValueState } from "../../context/SearchValueContext";
+import {
+  useSearchValueState,
+  useSearchValueDispatch,
+} from "../../context/SearchValueContext";
+import {} from "../../context/SearchValueContext";
 
 import { endpoints } from "../../config/constants";
 import searchUtil from "../../utils/searchUtil";
@@ -18,6 +22,7 @@ import useStyles from "./States.style";
 function State() {
   const classes = useStyles();
   const { searchValue } = useSearchValueState();
+  const dispatch = useSearchValueDispatch();
 
   const requestURLConst = "for=state:*&DATE_CODE=1";
 
@@ -25,6 +30,11 @@ function State() {
     `${endpoints.mainURL}${requestURLConst}`,
     csv2objFetcherService
   );
+
+  useEffect(() => {
+    dispatch({ type: "setSearchValueReducer", payload: "" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (error) {
     return (
@@ -71,9 +81,9 @@ function State() {
               to={`${Number(state.state)}/counties`}
             >
               <ContentCard
-                title={state.NAME}
-                population={state.POP}
-                density={state.DENSITY}
+                title={state.NAME || ""}
+                population={state.POP || ""}
+                density={state.DENSITY || ""}
               />
             </Link>
           )

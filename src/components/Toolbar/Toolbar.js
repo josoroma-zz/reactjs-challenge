@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import { default as AppToolbar } from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SearchBar from "material-ui-search-bar";
 
-import { useSearchValueDispatch } from "../../context/SearchValueContext";
+import {
+  useSearchValueState,
+  useSearchValueDispatch,
+} from "../../context/SearchValueContext";
 
 import useStyles from "./Toolbar.style";
 
 function Toolbar() {
   const classes = useStyles();
-  const [searchValue] = useState("");
+  let { searchValue } = useSearchValueState();
   const dispatch = useSearchValueDispatch();
 
   return (

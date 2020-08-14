@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
@@ -6,7 +6,13 @@ import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
+import {
+  useSearchValueState,
+  useSearchValueDispatch,
+} from "../../context/SearchValueContext";
+
 import { endpoints } from "../../config/constants";
+import searchUtil from "../../utils/searchUtil";
 import csv2objFetcherService from "../../services/csv2objFetcherService";
 import ContentCard from "../ContentCard/ContentCard";
 import ContentMessage from "../ContentMessage/ContentMessage";
@@ -16,6 +22,8 @@ import useStyles from "./Counties.style";
 function Counties() {
   const classes = useStyles();
   const { stateId } = useParams();
+  let { searchValue } = useSearchValueState();
+  const dispatch = useSearchValueDispatch();
 
   const requestURLConst = `for=county:*&in=state:${Number(stateId)}`;
 
@@ -23,6 +31,12 @@ function Counties() {
     `${endpoints.mainURL}${requestURLConst}`,
     csv2objFetcherService
   );
+
+  useEffect(() => {
+    dispatch({ type: "setSearchValueReducer", payload: "" });
+    console.log("HERE");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (error) {
     return (
@@ -40,7 +54,19 @@ function Counties() {
     return <ContentMessage type="progress" />;
   }
 
-  const { data: response } = data;
+  const searchResults = searchUtil(data.data, searchValue);
+
+  if (searchResults.length === 0) {
+    return (
+      <ContentMessage
+        type="message"
+        title="No Search Results Found!"
+        description="Let's ask again."
+      />
+    );
+  }
+
+  console.log("searchResults", searchResults);
 
   return (
     <Container className={classes.root} maxWidth="md">
@@ -48,16 +74,16 @@ function Counties() {
         Counties
       </Typography>
       <Divider className={classes.divider} />
-      {response.map(
+      {searchResults.map(
         (county) =>
           county.NAME &&
           county.state &&
           county.county && (
             <ContentCard
               key={Number(county.county)}
-              title={county.NAME}
-              population={county.POP}
-              density={county.DENSITY}
+              title={county.NAME || ""}
+              population={county.POP || ""}
+              density={county.DENSITY || ""}
             />
           )
       )}
