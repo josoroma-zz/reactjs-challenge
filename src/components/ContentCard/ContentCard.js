@@ -5,6 +5,9 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
+import formatNumber from "../../utils/formatNumber";
+import formatFloat from "../../utils/formatFloat";
+
 import useStyles from "./ContentCard.style";
 
 function ContentCard({ title = "", population = "", density = "" }) {
@@ -17,8 +20,12 @@ function ContentCard({ title = "", population = "", density = "" }) {
         classes={{ root: classes.header, title: classes.title }}
       />
       <CardContent>
-        <Typography variant="body2">Population: {population}</Typography>
-        <Typography variant="body2">Population Density: {density}</Typography>
+        <Typography variant="body2">
+          Population: {formatNumber(population)}
+        </Typography>
+        <Typography variant="body2">
+          Population Density: {formatFloat(density)}
+        </Typography>
       </CardContent>
     </Card>
   );

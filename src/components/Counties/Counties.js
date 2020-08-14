@@ -34,7 +34,6 @@ function Counties() {
 
   useEffect(() => {
     dispatch({ type: "setSearchValueReducer", payload: "" });
-    console.log("HERE");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,8 +64,6 @@ function Counties() {
       />
     );
   }
-
-  console.log("searchResults", searchResults);
 
   return (
     <Container className={classes.root} maxWidth="md">

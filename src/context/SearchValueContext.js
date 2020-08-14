@@ -6,7 +6,6 @@ const SearchValueDispatchContext = createContext();
 function searchValueReducer(state, action) {
   switch (action.type) {
     case "setSearchValueReducer": {
-      console.log("--- HERE 2 ---");
       return { searchValue: action.payload };
     }
     default: {

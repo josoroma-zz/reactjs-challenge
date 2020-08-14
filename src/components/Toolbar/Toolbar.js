@@ -2,6 +2,7 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import { default as AppToolbar } from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import SearchBar from "material-ui-search-bar";
 
@@ -23,9 +24,11 @@ function Toolbar() {
         <AppToolbar className={classes.toolbar}>
           <Grid container>
             <Grid item xs={6}>
-              <Typography className={classes.title} variant="h6">
-                Population Estimates
-              </Typography>
+              <Link className={classes.link} to={"/"}>
+                <Typography className={classes.title} variant="h6">
+                  Population Estimates
+                </Typography>
+              </Link>
             </Grid>
             <Grid item xs={6}>
               <SearchBar

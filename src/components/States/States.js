@@ -62,8 +62,6 @@ function State() {
     );
   }
 
-  console.log("searchResults", searchResults);
-
   return (
     <Container className={classes.root} maxWidth="md">
       <Typography variant="h1" className={classes.title}>
