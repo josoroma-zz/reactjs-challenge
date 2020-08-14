@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "reactjs-challenge"
+    "default": "reactjs-challenge",
+    "challenge": "reactjs-challenge"
   }
 }
