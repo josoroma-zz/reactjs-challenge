@@ -1,5 +1,7 @@
 # Challenge
 
+- Accepted and completed: https://reactjs-challenge.web.app
+
 Clone and re-create the current Angular App, this time make it work in React. Please feel free to use:
 
 - Lodash.
