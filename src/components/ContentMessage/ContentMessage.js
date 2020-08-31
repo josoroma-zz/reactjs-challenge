@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import Container from "@material-ui/core/Container";
+import CardHeader from "@material-ui/core/CardHeader";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Container from "@material-ui/core/Container";
+import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./ContentMessage.style";
 
-const ContentMessage = ({ title, description, type }) => {
+const ContentMessage = ({ description, title, type }) => {
   const classes = useStyles();
   const isMessage = type === "message";
   const containerClass = isMessage ? classes.message : classes.progress;
@@ -38,8 +38,8 @@ ContentMessage.defaultProps = {
 };
 
 ContentMessage.propTypes = {
-  title: PropTypes.string,
   description: PropTypes.string,
+  title: PropTypes.string,
   type: PropTypes.string.isRequired,
 };
 

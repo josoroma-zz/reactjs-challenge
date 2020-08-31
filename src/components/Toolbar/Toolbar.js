@@ -1,14 +1,16 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import Grid from "@material-ui/core/Grid";
 import { default as AppToolbar } from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import SearchBar from "material-ui-search-bar";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import SearchBar from "material-ui-search-bar";
+import Typography from "@material-ui/core/Typography";
 
-import useSearchValueState from "../../context/useSearchValueState";
-import useSearchValueDispatch from "../../context/useSearchValueDispatch";
+import {
+  useSearchValueDispatch,
+  useSearchValueState,
+} from "context/SearchValue";
 
 import useStyles from "./Toolbar.style";
 
@@ -39,11 +41,13 @@ const Toolbar = () => {
             </Grid>
             <Grid item xs={6}>
               <SearchBar
-                inputProps={{ "data-testid": "id-search-bar-input" }}
-                value={searchValue}
+                // Event Handlers
                 onChange={(value) => handleOnChange(value)}
                 onCancelSearch={handleOnCancelSearch}
+                // Rest of the Props
                 closeIcon={<CloseIcon data-testid="id-search-close-icon" />}
+                inputProps={{ "data-testid": "id-search-bar-input" }}
+                value={searchValue}
               />
             </Grid>
           </Grid>

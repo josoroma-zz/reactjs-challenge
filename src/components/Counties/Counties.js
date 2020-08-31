@@ -6,14 +6,17 @@ import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
-import useSearchValueState from "../../context/useSearchValueState";
-import useSearchValueDispatch from "../../context/useSearchValueDispatch";
+import {
+  useSearchValueDispatch,
+  useSearchValueState,
+} from "context/SearchValue";
 
-import { endpoints } from "../../config/constants";
-import searchUtil from "../../utils/searchUtil";
-import csv2objFetcherService from "../../services/csv2objFetcherService";
-import ContentCard from "../ContentCard/ContentCard";
-import ContentMessage from "../ContentMessage/ContentMessage";
+import { endpoints } from "config/constants";
+import searchUtil from "utils/searchUtil";
+import csv2objFetcherService from "services/csv2objFetcherService";
+
+import { ContentCard } from "components";
+import { ContentMessage } from "components";
 
 import useStyles from "./Counties.style";
 
@@ -90,15 +93,17 @@ const Counties = () => {
           county.state &&
           county.county && (
             <ContentCard
+              // Key
               key={Number(county.county)}
-              title={county.NAME}
-              population={county.POP}
+              // Rest of the Props
               density={county.DENSITY}
+              population={county.POP}
+              title={county.NAME}
             />
           )
       )}
     </Container>
   );
-}
+};
 
 export default Counties;

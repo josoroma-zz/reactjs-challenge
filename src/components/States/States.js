@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 import useSWR from "swr";
 
-import useSearchValueState from "../../context/useSearchValueState";
-import useSearchValueDispatch from "../../context/useSearchValueDispatch";
-import { endpoints } from "../../config/constants";
-import searchUtil from "../../utils/searchUtil";
-import csv2objFetcherService from "../../services/csv2objFetcherService";
-import ContentCard from "../ContentCard/ContentCard";
-import ContentMessage from "../ContentMessage/ContentMessage";
+import {
+  useSearchValueDispatch,
+  useSearchValueState,
+} from "context/SearchValue";
+
+import { endpoints } from "config/constants";
+import searchUtil from "utils/searchUtil";
+import csv2objFetcherService from "services/csv2objFetcherService";
+
+import { ContentCard } from "components";
+import { ContentMessage } from "components";
 
 import useStyles from "./States.style";
 
@@ -86,14 +90,16 @@ const State = () => {
             state.NAME &&
             state.state && (
               <Link
-                className={classes.link}
+                // Key
                 key={Number(state.state)}
+                // Rest of the Props
+                className={classes.link}
                 to={`${Number(state.state)}/counties`}
               >
                 <ContentCard
-                  title={state.NAME}
-                  population={state.POP}
                   density={state.DENSITY}
+                  population={state.POP}
+                  title={state.NAME}
                 />
               </Link>
             )
