@@ -3,11 +3,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import * as swr from "swr";
 import { render, screen, wait } from "@testing-library/react";
 
-import useSearchValueDispatch from "../../context/useSearchValueDispatch";
+import {
+  SearchValueProvider,
+  useSearchValueDispatch,
+} from "context/SearchValue";
+
+import { endpoints } from "../../config/constants";
 import csv2objFetcherService from "../../services/csv2objFetcherService";
 import searchUtil from "../../utils/searchUtil";
-import { SearchValueProvider } from "../../context/SearchValueContext";
-import { endpoints } from "../../config/constants";
 
 import States from "./States";
 
@@ -32,10 +35,11 @@ const mockSuccessfulResponse = [
   },
 ];
 
+jest.mock("context/SearchValue/useSearchValueDispatch");
+
 jest.mock("../../services/csv2objFetcherService");
 jest.mock("../../utils/searchUtil");
 
-jest.mock("../../context/useSearchValueDispatch");
 const setSearchValueReducer = { type: "setSearchValueReducer", payload: "" };
 const dispatch = jest.fn();
 

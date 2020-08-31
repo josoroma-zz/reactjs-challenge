@@ -1,7 +1,7 @@
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 
-import useSearchValueState from "./useSearchValueState";
+import { useSearchValueState } from "context/SearchValue";
 
 let mockUseContext = (React.useContext = jest.fn());
 

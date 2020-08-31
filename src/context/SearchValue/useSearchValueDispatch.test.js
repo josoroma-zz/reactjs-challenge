@@ -1,7 +1,7 @@
 import React from "react";
 import { renderHook } from "@testing-library/react-hooks";
 
-import useSearchValueDispatch from "./useSearchValueDispatch";
+import { useSearchValueDispatch } from "context/SearchValue";
 
 let mockUseContext = (React.useContext = jest.fn());
 

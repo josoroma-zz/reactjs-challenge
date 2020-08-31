@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SearchValueProvider } from "../../context/SearchValueContext";
+import { SearchValueProvider } from "context/SearchValue";
 
 import Toolbar from "./Toolbar";
 
