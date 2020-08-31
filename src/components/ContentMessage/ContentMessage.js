@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./ContentMessage.style";
 
-function ContentMessage({ title, description, type }) {
+const ContentMessage = ({ title, description, type }) => {
   const classes = useStyles();
   const isMessage = type === "message";
   const containerClass = isMessage ? classes.message : classes.progress;
@@ -31,7 +31,7 @@ function ContentMessage({ title, description, type }) {
       )}
     </Container>
   );
-}
+};
 
 ContentMessage.defaultProps = {
   type: "message",

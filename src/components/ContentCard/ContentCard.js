@@ -10,7 +10,7 @@ import formatFloat from "../../utils/formatFloat";
 
 import useStyles from "./ContentCard.style";
 
-function ContentCard({ title = "", population = "", density = "" }) {
+const ContentCard = ({ title, population, density }) => {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ function ContentCard({ title = "", population = "", density = "" }) {
       </CardContent>
     </Card>
   );
-}
+};
 
 ContentCard.defaultProps = {
   density: "",
@@ -38,9 +38,9 @@ ContentCard.defaultProps = {
 };
 
 ContentCard.propTypes = {
-  density: PropTypes.string.isRequired,
-  population: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  density: PropTypes.string,
+  population: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default ContentCard;

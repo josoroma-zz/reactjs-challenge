@@ -1,22 +1,29 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import { default as AppToolbar } from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
+import { default as AppToolbar } from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SearchBar from "material-ui-search-bar";
+import CloseIcon from "@material-ui/icons/Close";
+import { Link } from "react-router-dom";
 
-import {
-  useSearchValueState,
-  useSearchValueDispatch,
-} from "../../context/SearchValueContext";
+import useSearchValueState from "../../context/useSearchValueState";
+import useSearchValueDispatch from "../../context/useSearchValueDispatch";
 
 import useStyles from "./Toolbar.style";
 
-function Toolbar() {
+const Toolbar = () => {
   const classes = useStyles();
   let { searchValue } = useSearchValueState();
   const dispatch = useSearchValueDispatch();
+
+  const handleOnChange = (value) => {
+    dispatch({ type: "setSearchValueReducer", payload: value });
+  };
+
+  const handleOnCancelSearch = () => {
+    dispatch({ type: "setSearchValueReducer", payload: "" });
+  };
 
   return (
     <header>
@@ -32,13 +39,11 @@ function Toolbar() {
             </Grid>
             <Grid item xs={6}>
               <SearchBar
+                inputProps={{ "data-testid": "id-search-bar-input" }}
                 value={searchValue}
-                onChange={(value) => {
-                  dispatch({ type: "setSearchValueReducer", payload: value });
-                }}
-                onCancelSearch={() =>
-                  dispatch({ type: "setSearchValueReducer", payload: "" })
-                }
+                onChange={(value) => handleOnChange(value)}
+                onCancelSearch={handleOnCancelSearch}
+                closeIcon={<CloseIcon data-testid="id-search-close-icon" />}
               />
             </Grid>
           </Grid>
@@ -46,6 +51,6 @@ function Toolbar() {
       </AppBar>
     </header>
   );
-}
+};
 
 export default Toolbar;

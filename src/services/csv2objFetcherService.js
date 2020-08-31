@@ -1,14 +1,13 @@
-/**
- * Attempts:
- *   (1) import { default as converterService } from "../utils/csv2objConverterUtil";
- *   (2) import * as converterService from "papaparse";
- *   (3) import zipObject from "lodash.zipobject";
- */
 import _orderBy from "lodash.orderby";
 import _zipObject from "lodash.zipobject";
 
-const csv2objConverterService = (url: "") =>
+const csv2objConverterService = (url) =>
   fetch(url).then(async (res) => {
+    // Fetch by default will not throw an error for 4xx status codes.
+    if (res.status >= 400 && res.status <= 499) {
+      throw new Error("API Client Error");
+    }
+
     const result = await res.json();
 
     let converted = [];

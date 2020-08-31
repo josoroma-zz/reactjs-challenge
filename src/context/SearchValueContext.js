@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 
 const SearchValueStateContext = createContext();
 const SearchValueDispatchContext = createContext();
 
-function searchValueReducer(state, action) {
+const searchValueReducer = (state, action) => {
   switch (action.type) {
     case "setSearchValueReducer": {
       return { searchValue: action.payload };
@@ -12,9 +12,9 @@ function searchValueReducer(state, action) {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
-}
+};
 
-function SearchValueProvider({ children }) {
+const SearchValueProvider = ({ children }) => {
   const [state, dispatch] = useReducer(searchValueReducer, { searchValue: "" });
 
   return (
@@ -24,31 +24,11 @@ function SearchValueProvider({ children }) {
       </SearchValueDispatchContext.Provider>
     </SearchValueStateContext.Provider>
   );
-}
-
-function useSearchValueState() {
-  const context = useContext(SearchValueStateContext);
-  if (context === undefined) {
-    throw new Error(
-      "useSearchValueState must be used within a SearchValueProvider"
-    );
-  }
-  return context;
-}
-
-function useSearchValueDispatch() {
-  const context = useContext(SearchValueDispatchContext);
-  if (context === undefined) {
-    throw new Error(
-      "useSearchValueDispatch must be used within a SearchValueProvider"
-    );
-  }
-  return context;
-}
+};
 
 export {
+  SearchValueStateContext,
+  SearchValueDispatchContext,
   SearchValueProvider,
-  useSearchValueState,
-  useSearchValueDispatch,
   searchValueReducer,
 };

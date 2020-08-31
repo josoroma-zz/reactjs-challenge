@@ -10,27 +10,25 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import States from "./components/States/States";
 import Counties from "./components/Counties/Counties";
 
-function App() {
-  return (
-    <div>
-      <CssBaseline />
-      <SearchValueProvider>
-        <Router>
-          <div>
-            <Toolbar />
-            <Switch>
-              <Route path="/:stateId/counties">
-                <Counties />
-              </Route>
-              <Route path="/">
-                <States />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </SearchValueProvider>
-    </div>
-  );
-}
+const App = () => (
+  <div>
+    <CssBaseline />
+    <SearchValueProvider>
+      <Router>
+        <div>
+          <Toolbar />
+          <Switch>
+            <Route path="/:stateId/counties">
+              <Counties />
+            </Route>
+            <Route path="/">
+              <States />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </SearchValueProvider>
+  </div>
+);
 
 export default App;

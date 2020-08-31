@@ -7,7 +7,7 @@ import _toLower from "lodash.tolower";
 import _partialRight from "lodash.partialright";
 import _includes from "lodash.includes";
 
-function searchUtil(array, substr) {
+const searchUtil = (array, substr) => {
   return _filter(
     array,
     _flow(
@@ -18,6 +18,6 @@ function searchUtil(array, substr) {
       _partialRight(_includes, _toLower(substr))
     )
   );
-}
+};
 
 export default searchUtil;

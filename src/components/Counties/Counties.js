@@ -6,10 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 
-import {
-  useSearchValueState,
-  useSearchValueDispatch,
-} from "../../context/SearchValueContext";
+import useSearchValueState from "../../context/useSearchValueState";
+import useSearchValueDispatch from "../../context/useSearchValueDispatch";
 
 import { endpoints } from "../../config/constants";
 import searchUtil from "../../utils/searchUtil";
@@ -19,7 +17,7 @@ import ContentMessage from "../ContentMessage/ContentMessage";
 
 import useStyles from "./Counties.style";
 
-function Counties() {
+const Counties = () => {
   const classes = useStyles();
   const { stateId } = useParams();
   let { searchValue } = useSearchValueState();
@@ -39,34 +37,49 @@ function Counties() {
 
   if (error) {
     return (
-      <Link className={classes.link} to={"/"}>
-        <ContentMessage
-          type="message"
-          title="No data found!"
-          description="Let's try with another State."
-        />
-      </Link>
+      <div data-testid="id-counties-error">
+        <Link className={classes.link} to={"/"}>
+          <ContentMessage
+            type="message"
+            title="No data found!"
+            description="Let's try with another State."
+          />
+        </Link>
+      </div>
     );
   }
 
   if (!data) {
-    return <ContentMessage type="progress" />;
+    return (
+      <div data-testid="id-counties-progress">
+        <ContentMessage type="progress" />
+      </div>
+    );
   }
 
   const searchResults = searchUtil(data.data, searchValue);
 
-  if (searchResults.length === 0) {
+  if (
+    (Array.isArray(searchResults) && searchResults.length === 0) ||
+    searchResults === undefined
+  ) {
     return (
-      <ContentMessage
-        type="message"
-        title="No Search Results Found!"
-        description="Let's ask again."
-      />
+      <div data-testid="id-states-no-search-results">
+        <ContentMessage
+          type="message"
+          title="No Search Results Found!"
+          description="Let's ask again."
+        />
+      </div>
     );
   }
 
   return (
-    <Container className={classes.root} maxWidth="md">
+    <Container
+      data-testid="id-counties-container"
+      className={classes.root}
+      maxWidth="md"
+    >
       <Typography variant="h1" className={classes.title}>
         Counties
       </Typography>
@@ -78,9 +91,9 @@ function Counties() {
           county.county && (
             <ContentCard
               key={Number(county.county)}
-              title={county.NAME || ""}
-              population={county.POP || ""}
-              density={county.DENSITY || ""}
+              title={county.NAME}
+              population={county.POP}
+              density={county.DENSITY}
             />
           )
       )}
