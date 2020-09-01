@@ -5,9 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-import formatNumber from "../../utils/formatNumber";
-import formatFloat from "../../utils/formatFloat";
-
+import { formatNumber, formatFloat } from "utils";
 import useStyles from "./ContentCard.style";
 
 const ContentCard = ({ title, population, density }) => {

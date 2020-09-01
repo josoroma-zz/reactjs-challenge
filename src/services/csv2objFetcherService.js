@@ -1,7 +1,7 @@
 import _orderBy from "lodash.orderby";
 import _zipObject from "lodash.zipobject";
 
-const csv2objConverterService = (url) =>
+const csv2objFetcherService = (url) =>
   fetch(url).then(async (res) => {
     // Fetch by default will not throw an error for 4xx status codes.
     if (res.status >= 400 && res.status <= 499) {
@@ -25,4 +25,4 @@ const csv2objConverterService = (url) =>
     return response;
   });
 
-export default csv2objConverterService;
+export default csv2objFetcherService;

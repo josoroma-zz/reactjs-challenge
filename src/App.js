@@ -2,11 +2,13 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+// Custom Global State
 import { SearchValueProvider } from "context/SearchValue";
 
+// Layout Components
 import { ContentMessage, Toolbar } from "components";
 
-// Route Components - App Screens/Pages
+// Route Components/Screens
 const States = React.lazy(() => import("components/States/States"));
 const Counties = React.lazy(() => import("components/Counties/Counties"));
 

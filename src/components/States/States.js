@@ -10,12 +10,11 @@ import {
   useSearchValueState,
 } from "context/SearchValue";
 
-import { endpoints } from "config/constants";
-import searchUtil from "utils/searchUtil";
-import csv2objFetcherService from "services/csv2objFetcherService";
+import { endpoints } from "config";
+import { searchUtil } from "utils";
+import { csv2objFetcherService } from "services";
 
-import { ContentCard } from "components";
-import { ContentMessage } from "components";
+import { ContentCard, ContentMessage } from "components";
 
 import useStyles from "./States.style";
 
