@@ -52,7 +52,7 @@ describe("It should render a list of filtered states", () => {
     dispatch.mockReturnValue(setSearchValueReducer);
   });
 
-  test("It should test useEffect, dispatch and setSearchValueReducer", async () => {
+  test("It should test the useEffect dispatch", async () => {
     render(<StatesComponent />);
 
     expect(dispatch).toHaveBeenCalledTimes(1);

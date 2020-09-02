@@ -12,7 +12,9 @@ const CountiesFallback = () => (
 
 const Counties = () => (
   <Suspense fallback={<CountiesFallback />}>
-    <CountiesLazy />
+    <div data-testid="id-counties-lazy">
+      <CountiesLazy />
+    </div>
   </Suspense>
 );
 

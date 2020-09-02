@@ -17,7 +17,7 @@ import { csv2objFetcherService } from "services";
 
 import { ContentCard, ContentMessage } from "components";
 
-import useStyles from "./Counties.style";
+import useStyles from "./Counties.lazy.style";
 
 const CountiesLazy = () => {
   const classes = useStyles();
