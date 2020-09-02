@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -9,8 +9,8 @@ import { SearchValueProvider } from "context/SearchValue";
 import { ContentMessage, Toolbar } from "components";
 
 // Route Components/Screens
-const States = React.lazy(() => import("components/States/States"));
-const Counties = React.lazy(() => import("components/Counties/Counties"));
+const States = lazy(() => import("components/States/States"));
+const Counties = lazy(() => import("components/Counties/Counties"));
 
 const App = () => (
   <div>
