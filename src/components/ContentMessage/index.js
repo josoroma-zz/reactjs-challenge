@@ -1,3 +1,3 @@
-import ContentMessage from "./ContentMessage/ContentMessage";
+import ContentMessage from "./ContentMessage";
 
 export { ContentMessage };

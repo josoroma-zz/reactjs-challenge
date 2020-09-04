@@ -1,3 +1,3 @@
-import ContentCard from "./ContentCard/ContentCard";
+import ContentCard from "./ContentCard";
 
 export { ContentCard };

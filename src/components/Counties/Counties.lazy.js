@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
-import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import useSWR from "swr";
+import _get from "lodash.get";
 
 import {
   useSearchValueDispatch,
@@ -21,54 +21,57 @@ import useStyles from "./Counties.lazy.style";
 
 const CountiesLazy = () => {
   const classes = useStyles();
+  const history = useHistory();
+
   const { stateId } = useParams();
-  let { searchValue } = useSearchValueState();
+
+  const { searchValue } = useSearchValueState();
   const dispatch = useSearchValueDispatch();
 
   const requestURLConst = `for=county:*&in=state:${Number(stateId)}`;
 
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     `${endpoints.mainURL}${requestURLConst}`,
     csv2objFetcherService,
     { suspense: true }
   );
 
-  const hasData = data && data.data ? true : false;
+  const responseStatus = _get(data, "status");
+  const responseError = _get(data, "error", "");
 
   useEffect(() => {
     dispatch({ type: "setSearchValueReducer", payload: "" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (error) {
+  console.log("================> data: ", data);
+  console.log("================> responseStatus: ", responseStatus);
+  console.log("================> responseError: ", responseError);
+
+  if (responseStatus !== 200 && responseError !== "") {
+    console.log("================> IF ERROR: ", responseError);
     return (
-      <div data-testid="id-counties-error">
-        <Link className={classes.link} to={"/"}>
-          <ContentMessage
-            type="message"
-            title="No data found!"
-            description="Let's try with another State."
-          />
-        </Link>
+      <div data-testid="id-counties-response-error">
+        <Redirect
+          to={{
+            pathname: history.location.pathname,
+            state: { status: responseStatus, error: responseError },
+          }}
+        />
       </div>
     );
   }
 
-  if (!hasData) {
-    return null;
-  }
+  const searchResults = searchUtil(_get(data, "data", []), searchValue);
 
-  const searchResults = searchUtil(data.data, searchValue);
+  console.log("searchResults", searchResults);
 
-  if (
-    (Array.isArray(searchResults) && searchResults.length === 0) ||
-    searchResults === undefined
-  ) {
+  if (searchResults && searchResults.length === 0) {
     return (
-      <div data-testid="id-states-no-search-results">
+      <div data-testid="id-counties-no-search-results">
         <ContentMessage
           type="message"
-          title="No Search Results Found!"
+          title="No Results Found!"
           description="Let's ask again."
         />
       </div>

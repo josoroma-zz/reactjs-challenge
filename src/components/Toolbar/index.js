@@ -1,3 +1,3 @@
-import Toolbar from "./Toolbar/Toolbar";
+import Toolbar from "./Toolbar";
 
 export { Toolbar };

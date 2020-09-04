@@ -18,7 +18,7 @@ describe("It should test the counties component", () => {
   test("It should lazy-render the counties component", async () => {
     render(<CountiesComponent />);
 
-    expect(screen.getByTestId("id-counties-progress")).toBeInTheDocument();
+    expect(screen.getByTestId("id-request-progress")).toBeInTheDocument();
 
     act(() =>
       expect(screen.getByTestId("id-counties-lazy")).toBeInTheDocument()
