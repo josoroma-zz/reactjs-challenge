@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import _get from "lodash.get";
 import useSWR from "swr";
 
@@ -17,18 +18,16 @@ import { csv2objFetcherService } from "services";
 
 import { ContentCard, ContentMessage } from "components";
 
-import useStyles from "./Counties.lazy.style";
+import useStyles from "./States.lazy.style";
 
-const CountiesLazy = () => {
+const StatesLazy = () => {
   const classes = useStyles();
   const history = useHistory();
-
-  const { stateId } = useParams();
 
   const { searchValue } = useSearchValueState();
   const dispatch = useSearchValueDispatch();
 
-  const requestURLConst = `for=county:*&in=state:${Number(stateId)}`;
+  const requestURLConst = "for=state:*&DATE_CODE=1";
 
   const { data } = useSWR(
     `${endpoints.mainURL}${requestURLConst}`,
@@ -46,7 +45,7 @@ const CountiesLazy = () => {
 
   if (responseStatus !== 200 && responseError !== "") {
     return (
-      <div data-testid="id-counties-response-error">
+      <div data-testid="id-states-response-error">
         <Redirect
           to={{
             pathname: history.location.pathname,
@@ -61,7 +60,7 @@ const CountiesLazy = () => {
 
   if (searchResults && searchResults.length === 0) {
     return (
-      <div data-testid="id-counties-no-search-results">
+      <div data-testid="id-states-no-search-results">
         <ContentMessage
           type="message"
           title="No Results Found!"
@@ -73,31 +72,38 @@ const CountiesLazy = () => {
 
   return (
     <Container
-      data-testid="id-counties-container"
+      data-testid="id-states-container"
       className={classes.root}
       maxWidth="md"
     >
       <Typography variant="h1" className={classes.title}>
-        Counties
+        States
       </Typography>
       <Divider className={classes.divider} />
       {searchResults.map(
-        (county) =>
-          county.NAME &&
-          county.state &&
-          county.county && (
-            <ContentCard
+        (state) =>
+          state.NAME &&
+          state.state && (
+            <Link
               // Key
-              key={Number(county.county)}
+              key={Number(state.state)}
               // Rest of the Props
-              density={county.DENSITY}
-              population={county.POP}
-              title={county.NAME}
-            />
+              className={classes.link}
+              to={`${Number(state.state)}/counties`}
+            >
+              <ContentCard
+                // Key
+                key={Number(state.state)}
+                // Rest of the Props
+                density={state.DENSITY}
+                population={state.POP}
+                title={state.NAME}
+              />
+            </Link>
           )
       )}
     </Container>
   );
 };
 
-export default CountiesLazy;
+export default StatesLazy;

@@ -14,8 +14,8 @@ const ErrorPage = ({ error, status }) => {
       <Link className={classes.link} to={"/"}>
         <ContentMessage
           type="message"
-          title={`API Status - ${status}`}
-          description={`${error}.`}
+          title={status ? `API Status - ${status}` : "Status"}
+          description={error ? `${error}.` : "Not Found!"}
         />
       </Link>
     </div>

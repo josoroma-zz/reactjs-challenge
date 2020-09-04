@@ -7,7 +7,6 @@ import { createBrowserHistory } from "history";
 import { SearchValueProvider } from "context/SearchValue";
 // Custom API Error Provider
 import { ErrorHandler } from "context/ErrorHandler";
-
 // Layout Components
 import { ContentMessage, Toolbar } from "components";
 

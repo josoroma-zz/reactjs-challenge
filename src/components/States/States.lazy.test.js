@@ -21,14 +21,14 @@ import { endpoints } from "config";
 
 import { Progress } from "components";
 
-import CountiesLazy from "./Counties.lazy";
+import StatesLazy from "./States.lazy";
 
-const CountiesLazyComponent = () => (
+const StatesLazyComponent = () => (
   <SearchValueProvider>
     <Router>
       <ErrorHandler>
         <Suspense fallback={<Progress />}>
-          <CountiesLazy />
+          <StatesLazy />
         </Suspense>
       </ErrorHandler>
     </Router>
@@ -37,16 +37,16 @@ const CountiesLazyComponent = () => (
 
 const mockStateId = "36";
 
-const countiesRequestURL = "for=county:*&in=state:36";
-const endpointURL = `${endpoints.mainURL}${countiesRequestURL}`;
+const statesRequestURL = "for=state:*&DATE_CODE=1";
+const endpointURL = `${endpoints.mainURL}${statesRequestURL}`;
 
 const mockSuccessfulResponse = [
   {
-    NAME: "Allegany County, New York",
-    POP: "46091",
-    DENSITY: "44.77637219000000",
+    NAME: "New York",
+    POP: "19378102",
+    DENSITY: "411.21713488",
+    DATE_CODE: "1",
     state: mockStateId,
-    county: "003",
   },
 ];
 
@@ -62,18 +62,10 @@ jest.mock("context/SearchValue/useSearchValueDispatch");
 jest.mock("services/csv2objFetcherService");
 jest.mock("utils/searchUtil");
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: () => ({
-    stateId: mockStateId,
-  }),
-  useRouteMatch: () => ({ url: `/${mockStateId}/counties` }),
-}));
-
 const setSearchValueReducer = { type: "setSearchValueReducer", payload: "" };
 const dispatch = jest.fn();
 
-describe("Group - Counties Lazy", () => {
+describe("Group - States Lazy", () => {
   beforeEach(() => {
     fetch.resetMocks();
     jest.resetAllMocks();
@@ -82,18 +74,18 @@ describe("Group - Counties Lazy", () => {
     dispatch.mockReturnValue(setSearchValueReducer);
   });
 
-  test("It should display a container with a list of counties", async () => {
+  test("It should display a container with a list of states", async () => {
     csv2objFetcherService.mockResolvedValue(mockSuccessfulResponse);
     searchUtil.mockReturnValue(mockSuccessfulResponse);
 
-    render(<CountiesLazyComponent />);
+    render(<StatesLazyComponent />);
 
     await waitForElementToBeRemoved(() =>
       screen.getByTestId("id-request-progress")
     );
 
     await wait(() => {
-      expect(screen.getByTestId("id-counties-container")).toBeInTheDocument();
+      expect(screen.getByTestId("id-states-container")).toBeInTheDocument();
     });
 
     mockSuccessfulResponse.forEach((county) => {
@@ -111,15 +103,15 @@ describe("Group - Counties Lazy", () => {
     expect(searchUtil).toHaveBeenCalled();
   });
 
-  test("It should display a message when the list of counties is empty", async () => {
+  test("It should display a message when the list of states is empty", async () => {
     csv2objFetcherService.mockResolvedValue(mockSuccessfulResponse);
     searchUtil.mockReturnValue([]);
 
-    render(<CountiesLazyComponent />);
+    render(<StatesLazyComponent />);
 
     await wait(() => {
       expect(
-        screen.getByTestId("id-counties-no-search-results")
+        screen.getByTestId("id-states-no-search-results")
       ).toBeInTheDocument();
     });
 
@@ -130,7 +122,7 @@ describe("Group - Counties Lazy", () => {
     const spyUseSWR = jest.spyOn(swr, "default");
     spyUseSWR.mockReturnValue(mockUnsuccessfulResponse);
 
-    render(<CountiesLazyComponent />);
+    render(<StatesLazyComponent />);
 
     await wait(() => {
       expect(screen.getByTestId("id-error-message")).toBeInTheDocument();
