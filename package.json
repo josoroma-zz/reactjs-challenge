@@ -33,8 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-changed": "npm test --watchAll=false",
-    "test-coverage-text": "npm test -- --coverage --coverageReporters=\"text\" --watchAl",
-    "test-coverage-text-summary": "npm test -- --coverage --coverageReporters=\"text-summary\" --watchAl",
+    "test-coverage-text": "npm test -- --coverage --coverageReporters=\"text\" --watchAll",
+    "test-coverage-text-summary": "npm test -- --coverage --coverageReporters=\"text-summary\" --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
