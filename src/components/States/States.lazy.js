@@ -35,28 +35,31 @@ const StatesLazy = () => {
     { suspense: true }
   );
 
-  const responseStatus = _get(data, "status");
-  const responseError = _get(data, "error", "");
+  const response = {
+    status: _get(data, "status", 200),
+    data: _get(data, "data", []),
+    error: _get(data, "error", ""),
+  };
 
   useEffect(() => {
     dispatch({ type: "setSearchValueReducer", payload: "" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (responseStatus !== 200 && responseError !== "") {
+  if (response.status !== 200 && response.error !== "") {
     return (
       <div data-testid="id-states-response-error">
         <Redirect
           to={{
             pathname: history.location.pathname,
-            state: { status: responseStatus, error: responseError },
+            state: { status: response.status, error: response.error },
           }}
         />
       </div>
     );
   }
 
-  const searchResults = searchUtil(_get(data, "data", []), searchValue);
+  const searchResults = searchUtil(response.data, searchValue);
 
   if (searchResults && searchResults.length === 0) {
     return (

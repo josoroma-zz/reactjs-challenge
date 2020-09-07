@@ -129,5 +129,7 @@ describe("Group - States Lazy", () => {
     });
 
     expect(searchUtil).not.toHaveBeenCalled();
+
+    expect(spyUseSWR).toHaveBeenCalledTimes(1);
   });
 });

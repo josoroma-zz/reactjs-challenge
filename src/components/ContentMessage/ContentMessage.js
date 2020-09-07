@@ -27,7 +27,9 @@ const ContentMessage = ({ description, title, type }) => {
           </CardContent>
         </Card>
       ) : (
-        <CircularProgress />
+        <div data-testid="id-content-message-progress">
+          <CircularProgress />
+        </div>
       )}
     </Container>
   );

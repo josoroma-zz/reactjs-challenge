@@ -2,10 +2,10 @@ import {
   SearchValueDispatchContext,
   SearchValueStateContext,
   SearchValueProvider,
-  searchValueReducer,
 } from "./SearchValueContext";
 import useSearchValueDispatch from "./useSearchValueDispatch";
 import useSearchValueState from "./useSearchValueState";
+import searchValueReducer from "./searchValueReducer";
 
 export {
   SearchValueDispatchContext,

@@ -8,14 +8,16 @@ let mockUseContext = (React.useContext = jest.fn());
 const mockSearchValue = { searchValue: "" };
 const mockSearchValueUndefined = undefined;
 
-describe("It should check useSearchValueState", () => {
+describe("Suite - useSearchValueState", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test("It should check that useSearchValueState must be used within a SearchValueProvider", async () => {
     mockUseContext.mockReturnValue(mockSearchValueUndefined);
+
     const { result } = renderHook(() => useSearchValueState());
+
     try {
       expect(result).toBe(mockSearchValueUndefined);
     } catch (error) {
@@ -25,7 +27,9 @@ describe("It should check useSearchValueState", () => {
 
   test("It should check the searchValue", async () => {
     mockUseContext.mockReturnValue(mockSearchValue);
+
     const { result } = renderHook(() => useSearchValueState());
+
     expect(result.current).toBe(mockSearchValue);
   });
 });

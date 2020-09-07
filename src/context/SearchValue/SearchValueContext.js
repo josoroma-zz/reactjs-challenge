@@ -1,18 +1,8 @@
 import React, { createContext, useReducer } from "react";
+import searchValueReducer from "./searchValueReducer";
 
 const SearchValueStateContext = createContext();
 const SearchValueDispatchContext = createContext();
-
-const searchValueReducer = (state, action) => {
-  switch (action.type) {
-    case "setSearchValueReducer": {
-      return { searchValue: action.payload };
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
-    }
-  }
-};
 
 const SearchValueProvider = ({ children }) => {
   const [state, dispatch] = useReducer(searchValueReducer, { searchValue: "" });
@@ -30,5 +20,4 @@ export {
   SearchValueStateContext,
   SearchValueDispatchContext,
   SearchValueProvider,
-  searchValueReducer,
 };

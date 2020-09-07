@@ -32,8 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-watch-all": "npm test --watchAll",
-    "test-coverage": "npm test -- --coverage --watchAll=false",
+    "test-changed": "npm test --watchAll=false",
+    "test-coverage-text": "npm test -- --coverage --coverageReporters=\"text\" --watchAl",
+    "test-coverage-text-summary": "npm test -- --coverage --coverageReporters=\"text-summary\" --watchAl",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,6 +50,26 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/index.{js,jsx,ts,tsx}",
+      "!src/config/*",
+      "!src/index.js",
+      "!src/serviceWorker.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "text-summary"
     ]
   },
   "devDependencies": {

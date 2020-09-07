@@ -4,6 +4,6 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom/extend-expect";
 
-// https://github.com/jefflau/jest-fetch-mock#to-setup-for-an-individual-test
+// https://github.com/jefflau/jest-fetch-mock
 import fetchMock from "jest-fetch-mock";
 fetchMock.enableMocks();

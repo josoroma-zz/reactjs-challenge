@@ -137,5 +137,7 @@ describe("Group - Counties Lazy", () => {
     });
 
     expect(searchUtil).not.toHaveBeenCalled();
+
+    expect(spyUseSWR).toHaveBeenCalledTimes(1);
   });
 });

@@ -5,8 +5,8 @@ import App from "./App";
 
 const AppComponent = () => <App />;
 
-describe("It should test the app component", () => {
-  test("It should render the app component", async () => {
+describe("Suite App", () => {
+  test("It should render the App component", async () => {
     render(<AppComponent />);
   });
 });

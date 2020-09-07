@@ -1,16 +1,20 @@
 import _orderBy from "lodash.orderby";
 import _zipObject from "lodash.zipobject";
 
-const csv2objFetcherService = (url = "") =>
-  fetch(url).then(async (res) => {
-    let response = {
-      data: [],
-      error: "",
-      status: 0,
-    };
+const csv2objFetcherService = (url) => {
+  let response = {
+    data: [],
+    error: "",
+    status: 0,
+  };
 
-    if (res.status >= 400 && res.status <= 599) {
-      // Old approach was: `throw new Error("API Client Error");`
+  if (!url) {
+    return response;
+  }
+
+  return fetch(url).then(async (res) => {
+    if (res.status >= 400 && res.status <= 499) {
+      // Previous Global approach was:
       // history.replace(history.location.pathname, {
       //   errorStatusCode: res.status,
       // });
@@ -25,7 +29,8 @@ const csv2objFetcherService = (url = "") =>
 
       // CSV Respose to Object
       for (let i = 1; i < result.length; i++) {
-        converted.push(_zipObject(result[0], result[i]));
+        const item = _zipObject(result[0], result[i]);
+        converted.push(item);
       }
 
       const data = _orderBy(converted, ["NAME"], ["asc"]);
@@ -37,5 +42,6 @@ const csv2objFetcherService = (url = "") =>
 
     return response;
   });
+};
 
 export default csv2objFetcherService;

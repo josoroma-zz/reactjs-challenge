@@ -5,7 +5,7 @@ import _get from "lodash.get";
 import { ErrorPage } from "components";
 
 /**
- * Not exactly a Context but it behaves the same, as a wrapper.
+ * Not exactly a Context, but a wrapper.
  */
 const ErrorHandler = ({ children }) => {
   const location = useLocation();
